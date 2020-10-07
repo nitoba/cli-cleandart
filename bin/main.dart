@@ -1,4 +1,3 @@
-import 'package:args/args.dart';
 import 'package:clean_dart_cli/modules/app_module.dart';
 import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_layer_controller.dart';
 import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_usecase_controller.dart';
