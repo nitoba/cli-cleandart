@@ -85,6 +85,7 @@ class GenerateLayerController {
         );
         break;
       default:
+        output.error('This Layer not exists');
     }
   }
 }

@@ -17,10 +17,15 @@ void main(List<String> arguments) {
   if (isValidArguments != null) {
     switch (isValidArguments) {
       case 'layer':
-        generateLayerController.generateLayerFolders(
-          layeCommand: arguments[2],
-          path: arguments.length == 4 ? arguments[3] : './',
-        );
+        if (arguments.length > 2) {
+          generateLayerController.generateLayerFolders(
+            layeCommand: arguments[2],
+            path: arguments.length == 4 ? arguments[3] : './',
+          );
+        } else {
+          output.error('Invalid command, try with --help or -h');
+        }
+
         break;
       case 'usecase':
         generateUsecaseController.genereteUsecase();
@@ -35,15 +40,10 @@ String _validateArguments(List<String> arguments) {
     output.error('No arguments, try with --help or -h');
     return null;
   }
-
-  if (arguments.length < 3) {
-    output.error('Invalid command, try with --help or -h');
-    return null;
-  }
   var isValidArguments =
       appModule.argParser.options[arguments[0]].allowed.contains(arguments[1]);
+
   if (isValidArguments) {
-    output.title('Valid command');
     return arguments[1];
   } else {
     output.error('Invalid command, try with --help or -h');
