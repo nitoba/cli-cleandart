@@ -1,5 +1,5 @@
-import 'package:clean_dart_cli/clean_dart_cli.dart' as clean_dart_cli;
+import 'package:path/path.dart' as p;
 
 void main(List<String> arguments) {
-  print('Hello world: ${clean_dart_cli.calculate()}!');
+  print(p.current);
 }
