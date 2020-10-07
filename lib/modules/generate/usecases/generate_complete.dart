@@ -1,12 +1,12 @@
 import '../../../shared/interfaces/igenerate.dart';
 
-class GenerateDomain implements IGenerate {
+class GenerateComplete implements IGenerate {
   final IGenerate _gnDomain;
   final IGenerate _gnInfra;
   final IGenerate _gnExternal;
   final IGenerate _gnUI;
 
-  GenerateDomain(this._gnDomain, this._gnInfra, this._gnExternal, this._gnUI);
+  GenerateComplete(this._gnDomain, this._gnInfra, this._gnExternal, this._gnUI);
 
   @override
   Future<void> call(String path) async {

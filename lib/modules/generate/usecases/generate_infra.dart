@@ -2,7 +2,7 @@ import 'dart:io';
 
 import '../../../shared/interfaces/igenerate.dart';
 
-class GenerateDomain implements IGenerate {
+class GenerateInfra implements IGenerate {
   @override
   Future<void> call(String path) async {
     var dir = await Directory('$path/infra').create();
