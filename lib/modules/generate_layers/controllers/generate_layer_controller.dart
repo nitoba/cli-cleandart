@@ -44,7 +44,7 @@ class GenerateLayerController {
     output.error('Directory not exists');
   }
 
-  Future<void> executeLayerCommand({
+  Future<void> generateLayerFolders({
     String layeCommand,
     String path,
   }) async {

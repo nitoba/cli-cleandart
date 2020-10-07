@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:clean_dart_cli/modules/app_module.dart';
 import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_layer_controller.dart';
+import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_usecase_controller.dart';
 
 import 'package:clean_dart_cli/modules/generate_layers/generate_module.dart';
 import 'package:clean_dart_cli/modules/generate_layers/usecases/generate_complete.dart';
@@ -16,6 +17,10 @@ ArgResults argResults;
 enum ClassLayer { Domain, Infra, External, UI, Complete }
 void main(List<String> arguments) {
   var appModule = AppModule();
+  var generateLayerController =
+      appModule.generate.getIt<GenerateLayerController>();
+  var generateUsecaseController =
+      appModule.generate.getIt<GenerateUsecaseController>();
   _wellcomeMessage();
   var argParser = ArgParser();
   argResults = argParser.parse(arguments);
@@ -24,24 +29,32 @@ void main(List<String> arguments) {
 
   var isValidArguments = _validateArguments(argParser: argParser);
 
-  if (isValidArguments) {
-    appModule.generate.getIt.get<GenerateLayerController>().executeLayerCommand(
+  if (isValidArguments != null) {
+    switch (isValidArguments) {
+      case 'layer':
+        generateLayerController.generateLayerFolders(
           layeCommand: argResults.arguments[2],
           path:
               argResults.arguments.length == 4 ? argResults.arguments[3] : './',
         );
+        break;
+      case 'usecase':
+        generateUsecaseController.genereteUsecase();
+        break;
+      default:
+    }
   }
 }
 
-bool _validateArguments({ArgParser argParser}) {
+String _validateArguments({ArgParser argParser}) {
   var isValidArguments = argParser.options[argResults.arguments[0]].allowed
       .contains(argResults.arguments[1]);
   if (isValidArguments) {
     output.title('Valid command');
-    return true;
+    return argResults.arguments[1];
   } else {
-    output.error('Invalid command');
-    return false;
+    output.error('Invalid command, try with --help or -h');
+    return null;
   }
 }
 
@@ -49,7 +62,12 @@ void _addOptionsArguments(ArgParser argParser) {
   argParser.addOption(
     'gen',
     abbr: 'g',
-    allowed: ['layer', 'usecase', 'datasource', 'repository'],
+    allowed: ['layer', 'usecase', 'datasource', 'repository', 'model'],
+  );
+
+  argParser.addFlag(
+    'help',
+    abbr: 'h',
   );
 }
 

@@ -1,5 +1,6 @@
 import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_layer_controller.dart';
 import 'package:get_it/get_it.dart';
+import 'controllers/generate_usecase_controller.dart';
 import 'usecases/generate_complete.dart';
 import 'usecases/generate_damain.dart';
 import 'usecases/generate_external.dart';
@@ -24,6 +25,8 @@ class GenerateModule {
     );
     getIt.registerLazySingleton<GenerateLayerController>(
         () => GenerateLayerController());
+    getIt.registerLazySingleton<GenerateUsecaseController>(
+        () => GenerateUsecaseController());
   }
 
   GenerateModule() {
