@@ -4,11 +4,16 @@ import '../../../shared/interfaces/igenerate.dart';
 
 class GenerateUI implements IGenerate {
   @override
-  Future<void> call(String path) async {
-    var pathValid = path.replaceAll('//', '/');
-    var dir = await Directory('$pathValid/ui').create();
-    await Directory('${dir.path}/controllers').create();
-    await Directory('${dir.path}/pages').create();
-    await Directory('${dir.path}/components').create();
+  Future<bool> call(String path) async {
+    var isValidDirectory = await Directory(path).exists();
+    if (isValidDirectory) {
+      var dir = await Directory('$path/ui').create();
+      await Directory('${dir.path}/controllers').create();
+      await Directory('${dir.path}/pages').create();
+      await Directory('${dir.path}/components').create();
+      return true;
+    } else {
+      return false;
+    }
   }
 }

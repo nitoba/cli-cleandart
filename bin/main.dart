@@ -9,6 +9,8 @@ import 'package:clean_dart_cli/shared/utils/output_utils.dart' as output;
 import 'package:path/path.dart' as p;
 
 ArgResults argResults;
+
+enum ClassLayer { Domain, Infra, External, UI, Complete }
 void main(List<String> arguments) {
   _wellcomeMessage();
   var generate = GenerateModule();
@@ -16,13 +18,14 @@ void main(List<String> arguments) {
   argResults = argParser.parse(arguments);
 
   _addOptionsArguments(argParser);
+
   var isValidArguments = _validateArguments(argParser: argParser);
 
   if (isValidArguments) {
     _executeLayerCommand(
       generate: generate,
       layeCommand: argResults.arguments[2],
-      path: argResults.arguments[3],
+      path: argResults.arguments.length == 4 ? argResults.arguments[3] : './',
     );
   }
 }
@@ -39,28 +42,85 @@ bool _validateArguments({ArgParser argParser}) {
   }
 }
 
-void _executeLayerCommand(
-    {GenerateModule generate, String layeCommand, String path}) {
+void _generateLayer({
+  GenerateModule generate,
+  String layer,
+  String path,
+  ClassLayer layerClass,
+}) async {
+  output.warn('generating $layer layer....');
+  var pathNomalized = p.normalize('${p.current}/$path');
+  var result;
+  switch (layerClass) {
+    case ClassLayer.Domain:
+      result = await generate.getIt.get<GenerateDomain>().call(pathNomalized);
+      break;
+    case ClassLayer.Infra:
+      result = await generate.getIt.get<GenerateInfra>().call(pathNomalized);
+      break;
+    case ClassLayer.External:
+      result = await generate.getIt.get<GenerateExternal>().call(pathNomalized);
+      break;
+    case ClassLayer.UI:
+      result = await generate.getIt.get<GenerateUI>().call(pathNomalized);
+      break;
+    case ClassLayer.Complete:
+      result = await generate.getIt.get<GenerateComplete>().call(pathNomalized);
+      break;
+    default:
+  }
+  if (result) {
+    output.title('${layer.toUpperCase()} layer created');
+    return;
+  }
+  output.error('Directory not exists');
+}
+
+Future<void> _executeLayerCommand({
+  GenerateModule generate,
+  String layeCommand,
+  String path,
+}) async {
   switch (layeCommand) {
     case 'domain':
-      output.title('generating layer domain...');
-      generate.getIt.get<GenerateDomain>().call('${p.current}/$path');
+      _generateLayer(
+        generate: generate,
+        layer: layeCommand,
+        path: path,
+        layerClass: ClassLayer.Domain,
+      );
       break;
     case 'infra':
-      output.title('generating layer infra...');
-      generate.getIt.get<GenerateInfra>().call('${p.current}/$path');
+      _generateLayer(
+        generate: generate,
+        layer: layeCommand,
+        path: path,
+        layerClass: ClassLayer.Infra,
+      );
       break;
     case 'external':
-      output.title('generating layer external...');
-      generate.getIt.get<GenerateExternal>().call('${p.current}/$path');
+      _generateLayer(
+        generate: generate,
+        layer: layeCommand,
+        path: path,
+        layerClass: ClassLayer.External,
+      );
       break;
     case 'ui':
-      output.title('generating layer ui...');
-      generate.getIt.get<GenerateUI>().call('${p.current}/$path');
+      _generateLayer(
+        generate: generate,
+        layer: layeCommand,
+        path: path,
+        layerClass: ClassLayer.UI,
+      );
       break;
     case 'complete':
-      output.title('generating complete clean dart arch...');
-      generate.getIt.get<GenerateComplete>().call('${p.current}/$path');
+      _generateLayer(
+        generate: generate,
+        layer: layeCommand,
+        path: path,
+        layerClass: ClassLayer.Complete,
+      );
       break;
     default:
   }

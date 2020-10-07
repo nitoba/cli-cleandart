@@ -1,3 +1,3 @@
 abstract class IGenerate {
-  Future<void> call(String path);
+  Future<bool> call(String path);
 }

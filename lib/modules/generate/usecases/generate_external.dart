@@ -4,9 +4,14 @@ import '../../../shared/interfaces/igenerate.dart';
 
 class GenerateExternal implements IGenerate {
   @override
-  Future<void> call(String path) async {
-    var pathValid = path.replaceAll('//', '/');
-    var dir = await Directory('$pathValid/external').create();
-    await Directory('${dir.path}/datasource').create();
+  Future<bool> call(String path) async {
+    var isValidDirectory = await Directory(path).exists();
+    if (isValidDirectory) {
+      var dir = await Directory('$path/external').create();
+      await Directory('${dir.path}/datasource').create();
+      return true;
+    } else {
+      return false;
+    }
   }
 }
