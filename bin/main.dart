@@ -31,7 +31,7 @@ void main(List<String> arguments) {
         if (arguments.length > 3) {
           generateUsecaseController.genereteUsecase(arguments[3], arguments[2]);
         } else {
-          output.error('Invalid command, try with --help or -h');
+          output.error('Missing arguments, especific your usecase name');
         }
 
         break;
@@ -45,11 +45,6 @@ String _validateArguments(List<String> arguments) {
     output.error('No arguments, try with --help or -h');
     return null;
   }
-
-  // if (arguments.length > 2) {
-  //   output.error('No arguments, try with --help or -h');
-  //   return null;
-  // }
 
   appModule.argResults = appModule.argParser.parse(arguments);
 
