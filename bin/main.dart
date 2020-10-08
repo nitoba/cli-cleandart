@@ -28,7 +28,12 @@ void main(List<String> arguments) {
 
         break;
       case 'usecase':
-        generateUsecaseController.genereteUsecase();
+        if (arguments.length > 3) {
+          generateUsecaseController.genereteUsecase(arguments[3], arguments[2]);
+        } else {
+          output.error('Invalid command, try with --help or -h');
+        }
+
         break;
       default:
     }
