@@ -12,11 +12,17 @@ class AppModule {
       'gen',
       abbr: 'g',
       allowed: ['layer', 'usecase', 'datasource', 'repository', 'model'],
+      help: 'command to generate something',
     );
 
     argParser.addFlag(
       'help',
       abbr: 'h',
+    );
+
+    argParser.addFlag(
+      'version',
+      abbr: 'v',
     );
   }
 

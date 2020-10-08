@@ -15,7 +15,7 @@ void main(List<String> arguments) {
   var isValidArguments = _validateArguments(arguments);
 
   if (isValidArguments != null) {
-    switch (isValidArguments) {
+    switch (arguments[1]) {
       case 'layer':
         if (arguments.length > 2) {
           generateLayerController.generateLayerFolders(
@@ -40,6 +40,24 @@ String _validateArguments(List<String> arguments) {
     output.error('No arguments, try with --help or -h');
     return null;
   }
+
+  appModule.argResults = appModule.argParser.parse(arguments);
+
+  if (appModule.argResults['version']) {
+    output.title('Clean Dart CLI at version 0.0.0');
+    return null;
+  }
+
+  if (appModule.argResults['help']) {
+    output.warn(
+      '''
+    ----- HELPS ------
+    ${appModule.argParser.usage}
+    ''',
+    );
+    return null;
+  }
+
   var isValidArguments =
       appModule.argParser.options[arguments[0]].allowed.contains(arguments[1]);
 
