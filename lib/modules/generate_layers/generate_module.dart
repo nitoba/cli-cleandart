@@ -2,7 +2,7 @@ import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_laye
 import 'package:clean_dart_cli/modules/generate_layers/usecases/generate_usecases.dart';
 import 'package:clean_dart_cli/shared/interfaces/igenerate_usecases.dart';
 import 'package:get_it/get_it.dart';
-import 'controllers/generate_usecase_controller.dart';
+import 'controllers/generate_domain_controller.dart';
 import 'usecases/generate_complete.dart';
 import 'usecases/generate_damain.dart';
 import 'usecases/generate_external.dart';
@@ -36,8 +36,8 @@ class GenerateModule {
         getIt.get<GenerateComplete>(),
       ),
     );
-    getIt.registerLazySingleton<GenerateUsecaseController>(
-      () => GenerateUsecaseController(getIt.get<IGenerateUsecases>()),
+    getIt.registerLazySingleton<GenerateDoaminController>(
+      () => GenerateDoaminController(getIt.get<IGenerateUsecases>()),
     );
   }
 

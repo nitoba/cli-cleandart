@@ -2,10 +2,10 @@ import 'package:clean_dart_cli/shared/interfaces/igenerate_usecases.dart';
 import 'package:clean_dart_cli/shared/utils/output_utils.dart' as output;
 import 'package:path/path.dart' as p;
 
-class GenerateUsecaseController {
+class GenerateDoaminController {
   final IGenerateUsecases _generateUsecases;
 
-  GenerateUsecaseController(this._generateUsecases);
+  GenerateDoaminController(this._generateUsecases);
   Future<void> genereteUsecase(String usecaseName, String path) async {
     output.warn('generating usecase $usecaseName....');
     var pathNomalized = p.normalize('${p.current}/$path');
