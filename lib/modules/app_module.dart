@@ -15,15 +15,9 @@ class AppModule {
       help: 'command to generate something',
     );
 
-    argParser.addFlag(
-      'help',
-      abbr: 'h',
-    );
+    argParser.addFlag('help', abbr: 'h', negatable: false);
 
-    argParser.addFlag(
-      'version',
-      abbr: 'v',
-    );
+    argParser.addFlag('version', abbr: 'v', negatable: false);
   }
 
   void _bootstrap() {

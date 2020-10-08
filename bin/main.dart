@@ -41,6 +41,11 @@ String _validateArguments(List<String> arguments) {
     return null;
   }
 
+  // if (arguments.length > 2) {
+  //   output.error('No arguments, try with --help or -h');
+  //   return null;
+  // }
+
   appModule.argResults = appModule.argParser.parse(arguments);
 
   if (appModule.argResults['version']) {
@@ -51,13 +56,16 @@ String _validateArguments(List<String> arguments) {
   if (appModule.argResults['help']) {
     output.warn(
       '''
-    ----- HELPS ------
-    ${appModule.argParser.usage}
-    ''',
+-------------------------- HELPS -------------------------- 
+${appModule.argParser.usage}
+''',
     );
     return null;
   }
-
+  if (arguments.length < 2) {
+    output.error('Invalid command, try with --help or -h');
+    return null;
+  }
   var isValidArguments =
       appModule.argParser.options[arguments[0]].allowed.contains(arguments[1]);
 
