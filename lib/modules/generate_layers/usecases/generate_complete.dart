@@ -2,11 +2,11 @@ import 'dart:io';
 
 import '../../../shared/interfaces/igenerate.dart';
 
-class GenerateComplete implements IGenerate {
-  final IGenerate _gnDomain;
-  final IGenerate _gnInfra;
-  final IGenerate _gnExternal;
-  final IGenerate _gnUI;
+class GenerateComplete implements IGenerateLayers {
+  final IGenerateLayers _gnDomain;
+  final IGenerateLayers _gnInfra;
+  final IGenerateLayers _gnExternal;
+  final IGenerateLayers _gnUI;
 
   GenerateComplete(this._gnDomain, this._gnInfra, this._gnExternal, this._gnUI);
 

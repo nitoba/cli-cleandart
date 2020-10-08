@@ -2,7 +2,7 @@ import 'dart:io';
 
 import '../../../shared/interfaces/igenerate.dart';
 
-class GenerateExternal implements IGenerate {
+class GenerateExternal implements IGenerateLayers {
   @override
   Future<bool> call(String path) async {
     var isValidDirectory = await Directory(path).exists();
