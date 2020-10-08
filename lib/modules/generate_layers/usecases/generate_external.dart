@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../../shared/interfaces/igenerate.dart';
+import '../../../shared/interfaces/igenerate_layers.dart';
 
 class GenerateExternal implements IGenerateLayers {
   @override
