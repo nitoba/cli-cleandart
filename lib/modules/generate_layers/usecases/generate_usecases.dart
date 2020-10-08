@@ -9,10 +9,10 @@ class GenerateUsecases implements IGenerateUsecases {
     var isValidDirectory = await Directory(path).exists();
 
     if (isValidDirectory) {
-      await File('${path}/${usecaseName}_usecase.dart')
+      await File('${path}/${usecaseName.toLowerCase()}_usecase.dart')
           .createSync(recursive: true);
       var content = usecaseTemplate(usecaseName);
-      await File('${path}/${usecaseName}_usecase.dart')
+      await File('${path}/${usecaseName.toLowerCase()}_usecase.dart')
           .writeAsStringSync(content);
       return true;
     } else {

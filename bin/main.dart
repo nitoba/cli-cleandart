@@ -33,7 +33,13 @@ void main(List<String> arguments) {
         } else {
           output.error('Missing arguments, especific your usecase name');
         }
-
+        break;
+      case 'entity':
+        if (arguments.length > 3) {
+          generateUsecaseController.generateEntity(arguments[3], arguments[2]);
+        } else {
+          output.error('Missing arguments, especific your entity name');
+        }
         break;
       default:
     }
