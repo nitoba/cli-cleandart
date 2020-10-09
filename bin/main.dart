@@ -29,7 +29,7 @@ void main(List<String> arguments) {
         break;
       case 'usecase':
         if (arguments.length > 3) {
-          generateUsecaseController.genereteUsecase(arguments[3], arguments[2]);
+          generateUsecaseController.generateUsecase(arguments[3], arguments[2]);
         } else {
           output.error('Missing arguments, especific your usecase name');
         }
@@ -37,6 +37,13 @@ void main(List<String> arguments) {
       case 'entity':
         if (arguments.length > 3) {
           generateUsecaseController.generateEntity(arguments[3], arguments[2]);
+        } else {
+          output.error('Missing arguments, especific your entity name');
+        }
+        break;
+      case 'model':
+        if (arguments.length > 3) {
+          generateUsecaseController.generateModel(arguments[3], arguments[2]);
         } else {
           output.error('Missing arguments, especific your entity name');
         }

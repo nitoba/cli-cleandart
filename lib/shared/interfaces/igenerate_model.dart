@@ -1,3 +1,3 @@
 abstract class IGenerateModel {
-  Future<void> call(String modelName, String path);
+  Future<bool> call(String modelName, String path);
 }
