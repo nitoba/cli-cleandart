@@ -1,6 +1,6 @@
 import 'package:clean_dart_cli/modules/app_module.dart';
 import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_layer_controller.dart';
-import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_usecase_controller.dart';
+import 'package:clean_dart_cli/modules/generate_layers/controllers/generate_domain_controller.dart';
 import 'package:clean_dart_cli/shared/utils/output_utils.dart' as output;
 
 AppModule appModule;
@@ -10,7 +10,7 @@ void main(List<String> arguments) {
   var generateLayerController =
       appModule.generate.getIt<GenerateLayerController>();
   var generateUsecaseController =
-      appModule.generate.getIt<GenerateUsecaseController>();
+      appModule.generate.getIt<GenerateDoaminController>();
 
   var isValidArguments = _validateArguments(arguments);
 
@@ -28,7 +28,12 @@ void main(List<String> arguments) {
 
         break;
       case 'usecase':
-        generateUsecaseController.genereteUsecase();
+        if (arguments.length > 3) {
+          generateUsecaseController.genereteUsecase(arguments[3], arguments[2]);
+        } else {
+          output.error('Missing arguments, especific your usecase name');
+        }
+
         break;
       default:
     }
@@ -40,11 +45,6 @@ String _validateArguments(List<String> arguments) {
     output.error('No arguments, try with --help or -h');
     return null;
   }
-
-  // if (arguments.length > 2) {
-  //   output.error('No arguments, try with --help or -h');
-  //   return null;
-  // }
 
   appModule.argResults = appModule.argParser.parse(arguments);
 
