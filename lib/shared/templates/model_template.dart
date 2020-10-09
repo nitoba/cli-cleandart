@@ -1,7 +1,7 @@
-String entityTemplate(String modelName) {
+String modelTemplate(String modelName) {
   var output = '''
 class ${modelName}Model extends ${modelName}Entity {
-  GeneratedModel({String id, String userName}):super(
+  ${modelName}Model({String id, String userName}):super(
     id:id, userName:userName,
   );
 

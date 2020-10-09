@@ -11,14 +11,7 @@ class AppModule {
     argParser.addOption(
       'gen',
       abbr: 'g',
-      allowed: [
-        'layer',
-        'usecase',
-        'datasource',
-        'repository',
-        'model',
-        'entity'
-      ],
+      allowed: ['layer', 'usecase', 'datasource', 'entity', 'model'],
       help: 'command to generate something',
     );
 
