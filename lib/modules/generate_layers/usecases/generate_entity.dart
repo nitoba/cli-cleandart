@@ -8,10 +8,10 @@ class GenerateEntity implements IGenerateEntity {
   Future<bool> call(String entityName, String path) async {
     var isValidDirectory = await Directory(path).exists();
     if (isValidDirectory) {
-      await File('${path}/${entityName.toLowerCase()}_model.dart')
+      await File('${path}/${entityName.toLowerCase()}_entity.dart')
           .createSync(recursive: true);
       var content = entityTemplate(entityName);
-      await File('${path}/${entityName.toLowerCase()}_model.dart')
+      await File('${path}/${entityName.toLowerCase()}_entity.dart')
           .writeAsStringSync(content);
       return true;
     } else {
