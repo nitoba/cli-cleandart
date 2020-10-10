@@ -1,6 +1,6 @@
 # Clean Dart CLI
 
-![screenshots/screen.svg](screenshots/screen.svg)
+![screenshots/logo.png](screenshots/logo.png)
 
 This project is one cli for integrate Flutter and Dart with Clean Architecture
 
