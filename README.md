@@ -97,7 +97,7 @@ $ clean-dart gen modelJs /user/external/models User
 how to generate error
 
 ```dart
-$ clean-dart gen modelJs /user/domain/error User
+$ clean-dart gen error /user/domain/error User
 ```
 
 ![screenshots/model.png](screenshots/error.png)
