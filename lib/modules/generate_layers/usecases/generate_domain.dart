@@ -13,6 +13,7 @@ class GenerateDomain implements IGenerateLayers {
       await Directory('${dir.path}/entities').create();
       await Directory('${dir.path}/usecases').create();
       await Directory('${dir.path}/repositories').create();
+      await Directory('${dir.path}/errors').create();
       return true;
     } else {
       return false;

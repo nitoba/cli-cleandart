@@ -10,7 +10,7 @@ void main(List<String> arguments) {
   var generateLayerController =
       appModule.generate.getIt<GenerateLayerController>();
   var generateUsecaseController =
-      appModule.generate.getIt<GenerateDoaminController>();
+      appModule.generate.getIt<GenerateDomainController>();
 
   var isValidArguments = _validateArguments(arguments);
 
@@ -44,6 +44,20 @@ void main(List<String> arguments) {
       case 'model':
         if (arguments.length > 3) {
           generateUsecaseController.generateModel(arguments[3], arguments[2]);
+        } else {
+          output.error('Missing arguments, especific your entity name');
+        }
+        break;
+      case 'error':
+        if (arguments.length > 3) {
+          generateUsecaseController.generateError(arguments[3], arguments[2]);
+        } else {
+          output.error('Missing arguments, especific your entity name');
+        }
+        break;
+      case 'modelJs':
+        if (arguments.length > 3) {
+          generateUsecaseController.generateModelJs(arguments[3], arguments[2]);
         } else {
           output.error('Missing arguments, especific your entity name');
         }

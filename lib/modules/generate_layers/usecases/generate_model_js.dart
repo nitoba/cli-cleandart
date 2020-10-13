@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:clean_dart_cli/shared/errors/file_exists_error.dart';
-import 'package:clean_dart_cli/shared/interfaces/igenerate_model.dart';
-import 'package:clean_dart_cli/shared/templates/model_template.dart';
+import 'package:clean_dart_cli/shared/interfaces/igenerate_model_js.dart';
+import 'package:clean_dart_cli/shared/templates/model_js_template.dart';
 import 'package:recase/recase.dart';
 
-class GenerateModel implements IGenerateModel {
+class GenerateModelJs implements IGenerateModelJs {
   @override
   Future<bool> call(String modelName, String path) async {
     var isValidDirectory = await Directory(path).exists();
@@ -21,7 +21,7 @@ class GenerateModel implements IGenerateModel {
     if (isValidDirectory) {
       await File('${path}/${ReCase(modelName).snakeCase}_model.dart')
           .createSync(recursive: true);
-      var content = modelTemplate(modelName);
+      var content = modelJsTemplate(modelName);
       await File('${path}/${ReCase(modelName).snakeCase}_model.dart')
           .writeAsStringSync(content);
       return true;
