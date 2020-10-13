@@ -84,6 +84,24 @@ $ clean-dart gen model /example/infra/models User
 
 ![screenshots/model.png](screenshots/model.png)
 
+
+how to generate modelsJs (Model with Json Serializable)
+
+```dart
+$ clean-dart gen modelJs /user/external/models User
+```
+
+![screenshots/model.png](screenshots/model_js.png)
+
+
+how to generate error
+
+```dart
+$ clean-dart gen modelJs /user/domain/error User
+```
+
+![screenshots/model.png](screenshots/error.png)
+
 ## How to contribute?
 
 You can clone this project and send a pull request with your improvements or open issues
