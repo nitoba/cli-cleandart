@@ -1,10 +1,12 @@
+import 'package:recase/recase.dart';
+
 String entityTemplate(String entityName) {
   var output = '''
-class ${entityName}Entity {
+class ${ReCase(entityName).pascalCase}Entity {
   final String id;
   final String userName;
 
-  ${entityName}Entity({this.id, this.userName});
+  ${ReCase(entityName).pascalCase}Entity({this.id, this.userName});
 }
   ''';
 
